@@ -84,7 +84,8 @@ Challenges we had:
     Problem: the difficulty values were being overwritten due to multiple if statements. Also the API wasn't getting the narrative story to generate accurately.
     Solution: Take the code step by step and add print statements throughout the blocks of code to see if each segment was working as expected or not. 
 
-2. 
+2. The main.py file was running as needed and the import statements weren't syncing with the code. The backend connection was crashing and wouldn't run the FASTAPI since it was not registering.
+Solution: Modify the import statements and go line by line trying to fix all the FASTAPI statments and match the functions with the ones appearing in the ai_engine.py.
 3. 
 4. 
 
