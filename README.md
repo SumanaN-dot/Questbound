@@ -86,7 +86,7 @@ Challenges we had:
 
 2. The main.py file was running as needed and the import statements weren't syncing with the code. The backend connection was crashing and wouldn't run the FASTAPI since it was not registering.
 Solution: Modify the import statements and go line by line trying to fix all the FASTAPI statments and match the functions with the ones appearing in the ai_engine.py.
-3. 
+3. Having to recall certain CSS and HTML factors was also challenging at times, however through trial and error with the UI we were able to make the proper adjustments in order to get the pages looking how we wanted them to.  
 4. 
 
 Credits and Framework Acknowledgements 
@@ -96,5 +96,5 @@ Credits and Framework Acknowledgements
 
 - Google Gemini API — https://ai.google.dev
 
-- Figma AI - 
+- Figma AI - https://www.figma.com/make/kHtDLTX8nghEuv6JmcXD6w/AI-Dungeon-Master-Home-Page?p=f&t=VRoCfZvGVJJvsHcN-0 
 
