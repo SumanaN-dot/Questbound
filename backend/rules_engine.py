@@ -1,7 +1,10 @@
 from typing import Dict, Any
 import random
 
-'''
+from typing import Dict, Any
+import random
+
+
 def resolve_action(state: Dict[str, Any], action: str, roll: int | None = None) -> Dict[str, Any]:
 	"""
 	Very small rules resolver used by the backend.
@@ -44,130 +47,30 @@ def resolve_action(state: Dict[str, Any], action: str, roll: int | None = None) 
 
 
 def describe_outcome(outcome: Dict[str, Any]) -> str:
-	if outcome["success"]:
-		if outcome["is_crit"]:
-			return "A brilliant success — you landed a critical blow!"
-		return "You succeed at the action."
-	return f"You fail and take {outcome['damage_taken']} damage."
-'''
-
-import random 
-
-def roll_dice(sides: int) -> int:
-	return random.randint(1, sides)
-
-def roll_d20(advantage=False, disadvantage =False) -> int:
-	r1 = roll_dice(20)
-	r2 = roll_dice(20)
-
-	if advantage:
-		return max(r1, r2)
-	if disadvantage:
-		return min(r1, r2)
-	return r1
-
-def get_modifier(stat: int) -> int:
-	if stat <= 3: return -2
-	if stat <= 7: return -1
-	if stat <= 12: return 0
-	if stat <= 16: return 1
-	return 2
-
-DC = {
-	"easy": 10,
-	"medium": 15,
-	"hard": 20
-}
-
-# Attacking the System 
-WEAPON_DAMAGE = {
-	"dagger": lambda: roll_die(4),
-	"sword": lambda: roll_die(6),
-	"greatsword": lambda: roll_die(6) + roll_die(6),
-	"bow": lambda: roll_die(6)
-}
-
-def attack_roll(attacker_stat, enemy_ac, weapon):
-	roll = roll_d20()
-	mod = get_modifier(attacker_stat)
-	total = roll + mod
-	
-
-	hit = total >= enemy_ac
-	damage = WEAPON_DAMAGE.get(weapon, lambda: 0)() if hit else 0
-
-	return {
-		"roll": roll,
-		"mod": mod,
-		"total": total,
-		"hit": hit,
-		"damage": damage,
-		"is_crit": roll == 20
-	}
-
-def use_item(item: str):
-	if item == "healing_potion":
-		return {"heal": roll_die(6) + 2}
-	if item == "torch":
-		return {"light": True}
-	if item == "lockpick":
-		return {"advantage": True}
-	return {}
-
-def resolve_action(state, action: str, forced_roll=None):
-	action_lower = action.lower()
-	inventory = state.get("inventory", [])
-	player_stat = 12 #placeholder stat
-	enemy_ac = 12 #placeholder enemy AC
-
-	#1. Determining advantage from items
-	advantage = "lockpick" in inventory and ("lock" in action_lower)
-
-	#2. Rolling the dice
-	roll = forced_roll if forced_roll is not None else roll_d20(advantage=advantage)
-
-	#3. Attacking actions 
-	if "attack" in action_lower or "strike" in action_lower:
-		weapon = "sword" if "sword" in inventory else "dagger"
-		atk = attack_roll(player_stat, enemy_ac, weapon)
-		
-		return {
-			"success": atk["hit"],
-			"damage_taken": 0 if atk["hit"] else roll_die(4),
-			"is_crit": atk["is_crit"],
-			"difficulty": enemy_ac,
-			"roll": atk["roll"],
-			"action": action, 
-			"damage_dealt": atk["damage"]
-		}
-
-	#4. Skill Checks 
-	if "sneak" in action_lower:
-		dc = DC["medium"]
-	elif "climb" in action_lower or "jump" in action_lower:
-		dc = DC["easy"]
-	else: 
-		dc = DC["easy"]
-
-	mod = get_modifier(player_stat)
-	total = roll + mod
-	success = total >= dc
-
-	damage_taken = 0 if success else roll_die(4)
-
-	return {
-		"success": success, 
-		"damage_taken": damage_taken, 
-		"is_crit": roll == 20, 
-		"difficulty": dc, 
-		"roll": roll, 
-		"action": action
-	} 
-
-def describe_outcome(outcome):
-	if outcome["success"]:
-		if outcome["is_crit"]:
-			return "Critical Success! You perform the action flawlessly."
-		return "You succeed."
-	else: 
-		return f"You fail and take {outcome['damage_taken']} damage."
+    """Generate a varied fallback description based on outcome."""
+    action = outcome.get("action", "your action").lower()
+    roll = outcome.get("roll", 10)
+    damage = outcome.get("damage_taken", 0)
+    
+    if outcome["is_crit"]:
+        crit_msgs = [
+            f"A CRITICAL SUCCESS! Your {action} is devastatingly effective!",
+            f"Incredible! Your {action} succeeds spectacularly beyond your wildest dreams!",
+            f"A natural 20! Your {action} achieves legendary status!",
+        ]
+        return random.choice(crit_msgs)
+    
+    if outcome["success"]:
+        success_msgs = [
+            f"Your {action} succeeds! You navigate the situation with skill.",
+            f"Success! Your {action} has the desired effect.",
+            f"The dungeon yields to your {action}. You advance cautiously.",
+        ]
+        return random.choice(success_msgs)
+    else:
+        fail_msgs = [
+            f"Your {action} fails! You take {damage} damage as the dungeon punishes your hubris.",
+            f"The dungeon rejects your attempt at {action}. You suffer {damage} damage.",
+            f"Disaster! Your {action} backfires spectacularly, costing you {damage} HP.",
+        ]
+        return random.choice(fail_msgs)

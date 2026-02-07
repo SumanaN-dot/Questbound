@@ -1,0 +1,16 @@
+{
+    "name": "questbound",
+    "version": "1.0.0",
+    "description": "A quest-based application",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "test": "jest"
+    },
+    "keywords": ["quest", "game"],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {}
+}
