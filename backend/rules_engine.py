@@ -1,3 +1,4 @@
+'''
 from typing import Dict, Any
 import random
 
@@ -49,3 +50,67 @@ def describe_outcome(outcome: Dict[str, Any]) -> str:
 			return "A brilliant success — you landed a critical blow!"
 		return "You succeed at the action."
 	return f"You fail and take {outcome['damage_taken']} damage."
+'''
+
+import random 
+
+def roll_dice(sides: int) -> int:
+	return random.randint(1, sides)
+
+def roll_d20(advantage=False, disadvantage =False) -> int:
+	r1 = roll_dice(20)
+	r2 = roll_dice(20)
+
+	if advantage:
+		return max(r1, r2)
+	if disadvantage:
+		return min(r1, r2)
+	return r1
+
+def get_modifier(stat: int) -> int:
+	if stat <= 3: return -2
+	if stat <= 7: return -1
+	if stat <= 12: return 0
+	if stat <= 16: return 1
+	return 2
+
+DC = {
+	"easy": 10,
+	"medium": 15,
+	"hard": 20
+}
+
+# Attacking the System 
+WEAPON_DAMAGE = {
+	"dagger": lambda: roll_die(4),
+	"sword": lambda: roll_die(6),
+	"greatsword": lambda: roll_die(6) + roll_die(6),
+	"bow": lambda: roll_die(6)
+}
+
+def attack_rol(attacker_stat, enemy_ac, weapon):
+	roll = roll_d20()
+	mod = get_modifier(attacker_stat)
+	total = roll + mod
+	
+
+	hit = total >= enemy_ac
+	damage = WEAPON_DAMAGE.get(weapon, lambda: 0)() if hit else 0
+
+	return {
+		"roll": roll,
+		"mod": mod,
+		"total": total,
+		"hit": hit,
+		"damage": damage,
+		"is_crit": roll == 20
+	}
+
+def use_item(item: str):
+	if item == "healing_potion":
+		return {"heal": roll_die(6) + 2}
+	if item == "torch":
+		return {"light": True}
+	if item == "lockpick":
+		return {"advantage": True}
+	return {}
