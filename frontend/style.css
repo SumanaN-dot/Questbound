@@ -172,3 +172,120 @@ body {
 }
 
 
+
+/* MODAL BACKGROUND */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* MODAL BOX */
+.modal-content {
+  background: #0e0e0e;
+  border: 2px solid #7a1e1e;
+  width: 90%;
+  max-width: 400px;
+  margin: 10% auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  color: #eee;
+  position: relative;
+  box-shadow: 0 0 30px rgba(122, 30, 30, 0.7);
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  color: #b22222;
+}
+
+/* INPUTS */
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 0.5rem 0;
+  background: #111;
+  border: 1px solid #444;
+  color: #eee;
+  font-size: 1rem;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #7a1e1e;
+}
+
+/* CLOSE BUTTON */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+
+
+/* STATS SECTION */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+/* STAT CARD */
+.stats label {
+  background: linear-gradient(180deg, #111, #0a0a0a);
+  border: 1px solid #7a1e1e;
+  padding: 1rem;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  color: #eee;
+  box-shadow: 0 0 15px rgba(122, 30, 30, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stats label:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(178, 34, 34, 0.8);
+}
+
+/* STAT NAME */
+.stats label {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+/* NUMBER INPUT */
+.stats input {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  font-size: 1.4rem;
+  text-align: center;
+  background: #000;
+  border: 1px solid #444;
+  color: #b22222;
+  font-family: 'Uncial Antiqua', serif;
+}
+
+.stats input:focus {
+  outline: none;
+  border-color: #b22222;
+  box-shadow: 0 0 10px rgba(178, 34, 34, 0.8);
+}
+
