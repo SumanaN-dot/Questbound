@@ -32,7 +32,7 @@ Tech: Flask/FastAPI or Node/Express
 
 ⸻
 
-Person 3 — AI Prompting / DM Brain (Pragna)
+Person 3 — AI Prompting / DM Brain (Pragnya)
 
 Deliverables
     •    System prompt + formatting rules
