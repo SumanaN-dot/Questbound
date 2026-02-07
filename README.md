@@ -54,3 +54,22 @@ Deliverables
     •    Damage roll
     •    Enemy HP
     •    Item effects (healing potion, torch, lockpick)
+
+{
+  "narration": "You swing your sword at the goblin! It's a direct hit.",
+  "game_state": {
+    "location": "Dungeon Entrance",
+    "player_hp": 15,
+    "enemy_hp": 4,
+    "inventory": ["Old Map", "Health Potion"]
+  },
+  "dice_result": {
+    "roll_type": "Attack (Strength)",
+    "raw_roll": 18,
+    "modifier": 2,
+    "total": 20,
+    "dc_to_beat": 12,
+    "is_success": true
+  },
+  "visual_cue": "combat_hit" 
+}
