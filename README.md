@@ -1,6 +1,6 @@
 # Questbound
 
-https://github.com/user-attachments/assets/c3ae655b-041b-4c97-ab9a-6f843201e733
+https://github.com/user-attachments/assets/cac623ef-7f63-4ed6-bdd0-417e67ee4366
 
 Team split (4 people)
 
