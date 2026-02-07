@@ -15,19 +15,21 @@ function saveCharacter() {
 
   const totalPoints = Object.values(stats).reduce((a, b) => a + b, 0);
 
-  if (totalPoints > 10) {
-    alert("You have assigned too many stat points.");
+  if (totalPoints > 27) {
+    alert("You have assigned too many stat points. Max is 27.");
     return;
   }
 
   const character = {
+    name: "Adventurer",  // Default name; can be enhanced later
     class: selectedClass.value,
     stats
   };
 
   localStorage.setItem("playerCharacter", JSON.stringify(character));
 
-  // later this would go to game.html
+  // Navigate to the game
   alert("Your fate is sealed.");
   window.location.href = "play.html";
 }
+

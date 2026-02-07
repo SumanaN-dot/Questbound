@@ -45,6 +45,7 @@ def resolve_action(state: Dict[str, Any], action: str, roll: int | None = None) 
 
 
 def describe_outcome(outcome: Dict[str, Any]) -> str:
+<<<<<<< HEAD
 	if outcome["success"]:
 		if outcome["is_crit"]:
 			return "A brilliant success — you landed a critical blow!"
@@ -114,3 +115,32 @@ def use_item(item: str):
 	if item == "lockpick":
 		return {"advantage": True}
 	return {}
+=======
+    """Generate a varied fallback description based on outcome."""
+    action = outcome.get("action", "your action").lower()
+    roll = outcome.get("roll", 10)
+    damage = outcome.get("damage_taken", 0)
+    
+    if outcome["is_crit"]:
+        crit_msgs = [
+            f"A CRITICAL SUCCESS! Your {action} is devastatingly effective!",
+            f"Incredible! Your {action} succeeds spectacularly beyond your wildest dreams!",
+            f"A natural 20! Your {action} achieves legendary status!",
+        ]
+        return random.choice(crit_msgs)
+    
+    if outcome["success"]:
+        success_msgs = [
+            f"Your {action} succeeds! You navigate the situation with skill.",
+            f"Success! Your {action} has the desired effect.",
+            f"The dungeon yields to your {action}. You advance cautiously.",
+        ]
+        return random.choice(success_msgs)
+    else:
+        fail_msgs = [
+            f"Your {action} fails! You take {damage} damage as the dungeon punishes your hubris.",
+            f"The dungeon rejects your attempt at {action}. You suffer {damage} damage.",
+            f"Disaster! Your {action} backfires spectacularly, costing you {damage} HP.",
+        ]
+        return random.choice(fail_msgs)
+>>>>>>> e577f5a4ff8bf8813694a41ec5896d6b8900f4a7
