@@ -55,3 +55,45 @@ Deliverables
     •    Enemy HP
     •    Item effects (healing potion, torch, lockpick)
 
+Purpose of the Project:
+
+Questbound is an interactive, narrative-driven dungeon-crawler where the players choices shape the story in real time. 
+
+We built a powerful backend that processes player actions using a custom rules engine, and it generates a dynamic story narration using AI.
+
+Tools and Technologies Utilized:
+
+Backend and Game Logic:
+- Python 3.13
+- FastAPI 
+- Uvicorn - ASGI server 
+- Custom Rules Engine - resolves dice rolls, difficulty checks, and outcomes 
+- session manager - thread-safe in-memory state handling 
+
+AI and Narrative Generation
+- Google Gemini API - generates dynamic story narration
+
+Frontend/ integration
+- JSON based API, Figma AI
+
+Version Control
+- Git and Github 
+
+Challenges we had:
+1. Rules Engine not behaving as expected
+    Problem: the difficulty values were being overwritten due to multiple if statements. Also the API wasn't getting the narrative story to generate accurately.
+    Solution: Take the code step by step and add print statements throughout the blocks of code to see if each segment was working as expected or not. 
+
+2. 
+3. 
+4. 
+
+Credits and Framework Acknowledgements 
+- FastAPI — https://fastapi.tiangolo.com
+
+- Uvicorn — https://www.uvicorn.org
+
+- Google Gemini API — https://ai.google.dev
+
+- Figma AI - 
+
