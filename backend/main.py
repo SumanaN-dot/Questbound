@@ -56,7 +56,8 @@ def perform_action(session_id: str, req: ActionRequest):
 	# Resolve using the rules engine
 	try:
 		outcome = rules_engine.resolve_action(state, req.action, req.roll)
-	except Exception:
+	except Exception as e:
+		print(f"Rules engine error: {e}")
 		raise HTTPException(status_code=500, detail="Rules engine error")
 
 	# Apply outcome to state
@@ -69,12 +70,15 @@ def perform_action(session_id: str, req: ActionRequest):
 	rules_engine_desc = rules_engine.describe_outcome(outcome)
 	game_state.add_event(state, event_text + " -- " + rules_engine_desc)
 
-	# Try to generate a short narrative via AI; if it fails, fall back to a short text
+	# Try to generate a short narrative via AI; if it fails, use rules engine fallback
 	narrative = None
 	try:
+		print(f"Calling AI Engine for action: {req.action}")
 		narrative = AIEngine.generate_story(req.player_name, req.action, outcome.get("roll"), outcome)
-	except Exception:
-		# don't crash if AI fails
+		print(f"AI returned: {narrative[:100]}...")
+	except Exception as e:
+		# don't crash if AI fails; use rules engine description as fallback
+		print(f"AI Engine failed ({type(e).__name__}), using rules engine fallback: {e}")
 		narrative = rules_engine_desc
 
 	# Save updated state
@@ -90,7 +94,7 @@ def perform_action(session_id: str, req: ActionRequest):
 
 if __name__ == "__main__":
 	try:
-		uvicorn.run("backend.main:app", host="127.0.0.1", port=8000, reload=True)
+		uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 	except Exception:
 		print("Failed to start server")
 		traceback.print_exc()
