@@ -1,6 +1,6 @@
 # Questbound
 
-https://youtu.be/gfeaTeZMNRg
+https://github.com/user-attachments/assets/c3ae655b-041b-4c97-ab9a-6f843201e733
 
 Team split (4 people)
 
