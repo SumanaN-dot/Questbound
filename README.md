@@ -87,7 +87,9 @@ Challenges we had:
 2. The main.py file was running as needed and the import statements weren't syncing with the code. The backend connection was crashing and wouldn't run the FASTAPI since it was not registering.
 Solution: Modify the import statements and go line by line trying to fix all the FASTAPI statments and match the functions with the ones appearing in the ai_engine.py.
 3. Having to recall certain CSS and HTML factors was also challenging at times, however through trial and error with the UI we were able to make the proper adjustments in order to get the pages looking how we wanted them to.  
-4. 
+4. Making the API key private
+    At first we added the Gemini API key we were using to the ai_engine.py file on GitHub but we realized that API keys weren't meant to be shared publicly so we had to research how to hide the API key on GitHub while still making a functional app that could access the Gemini API. 
+    Solution: We ended up using a .env file for the new private API key and deleting the old compromised API key so it couldn't be used. We had to import the dotenv package to read the API key from the .env file.
 
 Credits and Framework Acknowledgements 
 - FastAPI — https://fastapi.tiangolo.com
