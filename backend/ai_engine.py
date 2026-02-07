@@ -4,7 +4,7 @@ import traceback
 
 # Setup Gemini with your API Key
 # You can get a key at https://aistudio.google.com/
-API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyBuU-AsE0HOr1RsK0btvBEXW_wgmiSyFkc")
+API_KEY = os.getenv("GEMINI_API_KEY", API_KEY)
 client = genai.Client(api_key=API_KEY)
 
 class AIEngine:
