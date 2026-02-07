@@ -1,8 +1,7 @@
-'''
 from typing import Dict, Any
 import random
 
-
+'''
 def resolve_action(state: Dict[str, Any], action: str, roll: int | None = None) -> Dict[str, Any]:
 	"""
 	Very small rules resolver used by the backend.
