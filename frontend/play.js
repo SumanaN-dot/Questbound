@@ -22,16 +22,19 @@ let sessionId = null;
 // Initialize backend session on page load
 async function initializeSession() {
   try {
+    console.log("Attempting to create backend session...");
     const res = await fetch(`${BACKEND_BASE}/session`, { method: "POST" });
     if (!res.ok) {
-      console.warn("Failed to create backend session:", res.status);
+      console.error("❌ Failed to create backend session. Status:", res.status);
+      console.error("Response:", await res.text());
       return;
     }
     const data = await res.json();
     sessionId = data.session_id;
-    console.log("Backend session created:", sessionId);
+    console.log("✅ Backend session created:", sessionId);
   } catch (err) {
-    console.warn("Backend unreachable, will use local responses:", err.message);
+    console.error("❌ Backend unreachable:", err.message);
+    console.error("Is the backend running on http://127.0.0.1:8000 ?");
     sessionId = null;
   }
 }
@@ -46,46 +49,59 @@ async function sendPrompt() {
   addToLog("player", text);
   input.value = "";
 
+  console.log("\n=== ACTION ATTEMPT ===");
+  console.log("Action:", text);
+  console.log("Session ID:", sessionId);
+
   // Try backend first
-  if (sessionId) {
-    try {
-      const payload = {
-        player_name: character.name || "Wanderer",
-        action: text,
-      };
+  if (!sessionId) {
+    console.warn("❌ No session ID - backend not connected. Using fallback.");
+    setTimeout(() => {
+      const response = generateMockResponse(text);
+      addToLog("dm", response);
+    }, 600);
+    return;
+  }
 
-      console.log("Sending to backend:", payload);
-      const res = await fetch(`${BACKEND_BASE}/session/${sessionId}/action`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+  try {
+    const payload = {
+      player_name: character.name || "Wanderer",
+      action: text,
+    };
 
-      if (res.ok) {
-        const data = await res.json();
-        console.log("Backend response:", data);
-        const narrative = data.narrative || "The dungeon remains silent...";
-        addToLog("dm", narrative);
-        // Also show the roll result
-        if (data.outcome) {
-          const rollText = `[Roll: ${data.outcome.roll}, Success: ${data.outcome.success}, HP: ${data.state.hp}]`;
-          console.log(rollText);
-        }
-        return;
-      } else {
-        console.warn("Backend action failed:", res.status);
-        const errorText = await res.text();
-        console.warn("Error details:", errorText);
+    console.log("📤 Sending to backend:", payload);
+    const res = await fetch(`${BACKEND_BASE}/session/${sessionId}/action`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    console.log("📥 Backend response status:", res.status);
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log("✅ Backend returned data:", data);
+      const narrative = data.narrative || "The dungeon remains silent...";
+      console.log("Using narrative:", narrative);
+      addToLog("dm", narrative);
+      // Also show the roll result
+      if (data.outcome) {
+        const rollText = `[Roll: ${data.outcome.roll}/${data.outcome.difficulty}, Success: ${data.outcome.success}, HP: ${data.state.hp}]`;
+        console.log(rollText);
       }
-    } catch (err) {
-      console.warn("Backend request failed:", err.message);
+      return;
+    } else {
+      console.error("❌ Backend error status:", res.status);
+      const errorText = await res.text();
+      console.error("Error details:", errorText);
     }
-  } else {
-    console.warn("No session ID - backend not connected");
+  } catch (err) {
+    console.error("❌ Backend request failed:", err.message);
+    console.error(err);
   }
 
   // Fallback to local response
-  console.log("Using local fallback response");
+  console.warn("⚠️ Falling back to local mock response");
   setTimeout(() => {
     const response = generateMockResponse(text);
     addToLog("dm", response);
