@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Dungeon</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">AI Dungeon Master</div>
+</header>
+
+<section class="hero">
+  <h1>The Dungeon <span>Awaits</span></h1>
+  <p>Your words shape reality. Speak carefully.</p>
+</section>
+
+<section class="rules game-container">
+
+  <!-- GAME LOG -->
+  <div id="game-log" class="game-log">
+    <p class="dm-text">
+      The torchlight flickers against damp stone walls. The air smells of rot and iron.
+      What do you do?
+    </p>
+  </div>
+
+  <!-- PLAYER INPUT -->
+  <div class="input-area">
+    <textarea
+      id="player-input"
+      placeholder="Describe your action..."
+      rows="4"
+    ></textarea>
+
+    <button class="blood-btn" onclick="sendPrompt()">Roll Fate</button>
+  </div>
+
+</section>
+
+<script src="play.js"></script>
+</body>
+</html>

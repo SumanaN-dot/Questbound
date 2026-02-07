@@ -134,3 +134,41 @@ body {
   border-bottom: 1px solid #300000;
   color: #ddd;
 }
+
+.game-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.game-log {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  height: 350px;
+  overflow-y: auto;
+  border: 1px solid #7a1c1c;
+  margin-bottom: 20px;
+}
+
+.dm-text {
+  color: #d4b26a;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.player-text {
+  color: #e0e0e0;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.input-area textarea {
+  width: 100%;
+  padding: 10px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #7a1c1c;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+

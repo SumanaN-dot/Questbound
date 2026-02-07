@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Your Character</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">AI Dungeon Master</div>
+
+    <nav>
+      
+      <a href="#">About DM</a>
+      <a href="#">Rules</a>
+      <button class="blood-btn">View Account</button>
+    </nav>
+  </header>
+
+<section class="hero">
+  <h1>Create Your <span>Champion</span></h1>
+  <p>Choose wisely. Your fate is bound to these choices.</p>
+</section>
+
+<section class="rules character-select">
+
+  <h2>Choose Your Class</h2>
+
+  <div class="class-grid">
+    <label>
+      <input type="radio" name="class" value="Mage">
+      <strong>Mage</strong>
+      <p>High intelligence, fragile body, devastating spells.</p>
+    </label>
+
+    <label>
+      <input type="radio" name="class" value="Warrior">
+      <strong>Warrior</strong>
+      <p>Heavy armor, brute strength, unyielding will.</p>
+    </label>
+
+    <label>
+      <input type="radio" name="class" value="Rogue">
+      <strong>Rogue</strong>
+      <p>Stealth, speed, and deadly precision.</p>
+    </label>
+
+    <label>
+      <input type="radio" name="class" value="Paladin">
+      <strong>Paladin</strong>
+      <p>Holy might, balance of strength and faith.</p>
+    </label>
+  </div>
+
+  <h2>Assign Your Stats</h2>
+
+  <p>You have <strong>10 points</strong> to distribute.</p>
+
+  <div class="stats">
+    <label>Strength <input type="number" min="0" max="10" value="0" id="str"></label>
+    <label>Dexterity <input type="number" min="0" max="10" value="0" id="dex"></label>
+    <label>Intelligence <input type="number" min="0" max="10" value="0" id="int"></label>
+    <label>Charisma <input type="number" min="0" max="10" value="0" id="cha"></label>
+  </div>
+
+
+<a href="play.html" class="blood-btn">Enter the Dungeon</a>
+</section>
+
+<script src="character.js"></script>
+</body>
+</html>
