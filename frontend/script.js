@@ -17,17 +17,8 @@ window.addEventListener("click", (event) => {
   });
 });
 
-// LOGIN FORM HANDLER
-document.getElementById("loginForm")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("The Dungeon recognizes you... enter wisely.");
-});
 
-// SIGNUP FORM HANDLER
-document.getElementById("signupForm")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("Your fate has been bound to the Dungeon.");
-});
+
 
 // OPTIONAL: HERO BUTTON FLAVOR (non-breaking)
 document
